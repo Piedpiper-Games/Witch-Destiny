@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Global Game Jam 2015</title>
+
+        <!-- Allow fullscreen mode on iOS devices. (These are Apple specific meta tags.) -->
+        <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+        <script type="text/javascript">
+
+            var isIPhone = false;
+            var isAndroid = false;
+
+            function _get_window_size() {
+                var e = window, a = 'inner';
+                if (!('innerWidth' in window)) {
+                    a = 'client';
+                    e = document.documentElement || document.body;
+                }
+                return {width: e[ a + 'Width' ], height: e[ a + 'Height' ]};
+            }
+
+            if (/iPhone|iPod/i.test(navigator.userAgent)) {
+                isIPhone = true;
+                var vp = window.document.getElementById("viewport");
+                vp.setAttribute("content", "width=device-width, initial-scale=0.5, maximum-scale=1.0, minimum-scale=0.5, user-scalable=no, minimal-ui");
+
+            } else if (/Android/i.test(navigator.userAgent)) {
+
+                isAndroid = true;
+                var size = _get_window_size();
+              
+                if (size.width < 480 || size.height <= 246) {
+
+                    var vp = window.document.getElementById("viewport");
+                    vp.setAttribute("content", "width=device-width, initial-scale=0.5, maximum-scale=1.0, minimum-scale=0.5, user-scalable=no, minimal-ui");
+
+                }
+
+            }
+
+        </script>
+
+
+
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="apple-touch-icon" sizes="256x256" href="icon-256.png" />
+        <meta name="HandheldFriendly" content="true" />
+
+        <!-- Chrome for Android web app tags -->
+        <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="shortcut icon" sizes="256x256" href="icon-256.png" />
+
+
+        <!-- CONFIGURATION -->
+        <script src="config.js" type="application/javascript" ></script>
+
+        <!-- EXTERNAL -->
+        <script src="lib/external/sat.js" type="application/javascript"></script>
+        <script src="lib/external/kibo.js" type="application/javascript"></script>
+        <script src="lib/external/howler.js" type="application/javascript"></script>
+        <script src="lib/external/spine.js" type="application/javascript"></script>
+        <script src="lib/external/gamepad.js" type="text/javascript"></script>
+
+        <!-- UTILITY -->
+        <script src="lib/utility/helpers.js" type="application/javascript"></script>
+        <script src="lib/utility/ticker.js" type="application/javascript"></script>
+        <script src="lib/utility/uid.js" type="text/javascript"></script>
+
+        <!-- RESOURCES -->
+        <script src="lib/resources/images.js" type="application/javascript"></script>
+        <script src="lib/resources/sounds.js" type="application/javascript"></script>
+        <script src="lib/resources/content_manager.js" type="application/javascript"></script>
+
+        <!-- GRAPHICS -->
+        <script src="lib/graphics/stage.js" type="application/javascript"></script>
+        <script src="lib/graphics/drawable.js" type="application/javascript"></script>
+        <script src="lib/graphics/screen.js" type="application/javascript"></script>                
+        <script src="lib/graphics/sprite_sheet.js" type="application/javascript"></script>
+        <script src="lib/graphics/sprite.js" type="application/javascript"></script>
+        <script src="lib/graphics/animation.js" type="application/javascript"></script>
+        <script src="lib/graphics/spine_animation.js" type="application/javascript"></script>
+        <script src="lib/graphics/emitter.js" type="application/javascript"></script>
+
+        <!-- EVENTS -->
+        <script src="lib/events/event.js" type="application/javascript"></script>
+        <script src="lib/events/input.js" type="application/javascript"></script>
+        <script src="lib/events/state_machine.js" type="application/javascript"></script>
+        <script src="lib/events/notes.js" type="application/javascript"></script>
+
+        <!-- TWEEN -->
+        <script src="lib/tweens/actions.js" type="application/javascript"></script>
+        <script src="lib/tweens/bezier.js" type="application/javascript"></script>
+        <script src="lib/tweens/tween_alpha.js" type="application/javascript"></script>
+        <script src="lib/tweens/tween_blink.js" type="application/javascript"></script>
+        <script src="lib/tweens/tween_move_to.js" type="application/javascript"></script>
+        <script src="lib/tweens/tween_pulsate.js" type="application/javascript"></script>
+        <script src="lib/tweens/tween_rotate.js" type="application/javascript"></script>
+        <script src="lib/tweens/tween_rotate_by.js" type="application/javascript"></script>
+        <script src="lib/tweens/tween_rotate_to.js" type="application/javascript"></script>
+        <script src="lib/tweens/tween_scale.js" type="application/javascript"></script>
+        <script src="lib/tweens/tween_shake.js" type="application/javascript"></script>
+        <script src="lib/tweens/tween_time.js" type="application/javascript"></script>
+
+        <!-- USER INTERFACE -->
+        <script src="lib/ui/navigator.js" type="application/javascript" ></script>
+        <script src="lib/ui/button.js" type="application/javascript" ></script>
+        <script src="lib/ui/label.js" type="application/javascript" ></script>
+        <script src="lib/ui/layer.js" type="application/javascript" ></script>      
+
+        <!-- SYSTEM GAME OBJECTS -->
+        <script src="game.js" type="application/javascript" ></script>
+        <script src="assets/assets.js" type="application/javascript" ></script>        
+        <script src="game/screens/game_screen.js" type="text/javascript"></script>
+        <script src="game/screens/loading_screen.js" type="text/javascript"></script>
+
+        <!-- USER GAME OBJECTS -->
+        <script src="game/platforms/float_bounce_platform.js" type="text/javascript"></script>
+        <script src="game/platforms/float_platform.js" type="text/javascript"></script>
+        <script src="game/platforms/one_way_platform.js" type="text/javascript"></script>
+        <script src="game/platforms/slope.js" type="text/javascript"></script>
+        <script src="game/platforms/solid_platform.js" type="text/javascript"></script>
+        
+        <script src="game/objects/bubble.js" type="text/javascript"></script>
+        
+        <script src="game/looper.js" type="text/javascript"></script>
+        <script src="game/screens/narative_screen.js" type="text/javascript"></script>
+        
+        <script src="game/grid.js" type="text/javascript"></script>
+        <script src="game/layer_map.js" type="text/javascript"></script>
+        <script src="game/characters/player.js" type="text/javascript"></script>
+        <script src="game/player_controller.js" type="text/javascript"></script>
+        <script src="game/player_states.js" type="text/javascript"></script>
+        <script src="game/platforms/box_platform.js" type="text/javascript"></script>
+        <script src="game/notes.js" type="text/javascript"></script>
+        <script src="game/characters/goat.js" type="text/javascript"></script>
+        <script src="game/particles/blood.js" type="text/javascript"></script>
+        <script src="game/objects/sensor.js" type="text/javascript"></script>
+        <script src="game/screens/loose_screen.js" type="text/javascript"></script>
+        <script src="game/screens/test_screen.js" type="text/javascript"></script>
+        <script src="game/objects/tent.js" type="text/javascript"></script>
+        <script src="game/screens/win_screen.js" type="text/javascript"></script>
+        <script src="game/screens/end_screen.js" type="text/javascript"></script>
+        <script src="game/objects/switch1.js" type="text/javascript"></script>
+        <script src="game/spikes.js" type="text/javascript"></script>
+        
+        <style type="text/css">
+
+            html, body, div, span, applet, object, iframe, 
+            h1, h2, h3, h4, h5, h6, p, blockquote, pre, 
+            a, abbr, acronym, address, big, cite, code, 
+            del, dfn, em, font, img, ins, kbd, q, s, samp, 
+            small, strike, strong, sub, sup, tt, var, 
+            dl, dt, dd, ol, ul, li, 
+            fieldset, form, label, legend, 
+            table, caption, tbody, tfoot, thead, tr, th, td{margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline}
+
+            :focus{outline:0}
+            ol, ul{list-style:none}
+            table{border-collapse:separate; border-spacing:0}
+            caption, th, td{text-align:left; font-weight:normal}
+            blockquote:before, blockquote:after, 
+            q:before, q:after{content:""}
+            blockquote, q{quotes:""""}
+            strong{font-weight: bold;}
+
+
+
+            #stage
+            {
+                -webkit-transform-origin:  0% 0%;
+                transform-origin: 0% 0%;
+                -ms-transform-origin: 0% 0%;
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+                position: relative;
+                overflow: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+
+                perspective: 1000px;
+                -webkit-perspective: 1000px;
+                -moz-perspective: 1000px;
+                -o-perspective: 1000px;
+
+                padding: 0;
+                margin: 0;
+                border: none;
+                border-image-width: 0;
+                background-color: #888888;
+
+            }
+            ::-moz-selection{
+                background-color:Transparent;
+            }
+            ::selection {
+                background-color:Transparent;
+            }
+            .element{
+                -webkit-transform-origin:  0% 0%;
+                transform-origin: 0% 0%;
+                -ms-transform-origin: 0% 0%;
+            }
+
+            div{
+                padding:0;
+                margin: 0;
+                left:0;
+                overflow: hidden;
+                border: none;
+                border-image-width: 0;
+                line-height: 0;
+            }
+
+
+            body{
+                overflow: hidden;
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+                margin: 0 ;
+                padding: 0 ;
+                transform: translateZ(0px);
+                -ms-transform: translateZ(0px); /* IE 9 */
+                -moz-transform: translateZ(0px); /* Firefox */
+                -webkit-transform: translateZ(0px); /* Safari and Chrome */
+                -o-transform: translateZ(0px); /* Opera */
+                border: none;
+                border-image-width: 0;
+                line-height: 0;
+                background-color: black;
+            }
+            
+            @font-face {
+                font-family: 'SwampWitch';
+                src: url('assets/fonts/SwampWitch.ttf');
+            }
+            
+            @font-face {
+                font-family: 'AuldMagick';
+                src: url('assets/fonts/AuldMagick.ttf');
+            }
+            
+            @font-face {
+                font-family: 'WAKINGTHEWITCH';
+                src: url('assets/fonts/WAKINGTHEWITCH.ttf');
+            }
+            
+        </style>
+
+
+    </head>
+    <body>
+    
+
+        <canvas id="stage" style="position: absolute; top: 0;left:0;" >
+            <h1>Your browser does not appear to support HTML5.  Try upgrading your browser to the latest version.  <a href="http://www.whatbrowser.org">What is a browser?</a>
+                <br/><br/><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx">Microsoft Internet Explorer</a><br/>
+                <a href="http://www.mozilla.com/firefox/">Mozilla Firefox</a><br/>
+                <a href="http://www.google.com/chrome/">Google Chrome</a><br/>
+                <a href="http://www.apple.com/safari/download/">Apple Safari</a><br/>
+                <a href="http://www.google.com/chromeframe">Google Chrome Frame for Internet Explorer</a><br/></h1>
+
+        </canvas>
+
+        <script type="text/javascript">
+
+            function game_start() {
+                Config.set_game_size(960, 640, Config.MODE_FLEXIBLE_WIDTH);
+                game = new Game();
+            }
+
+            window.addEventListener("load", function () {
+                
+                game_start();
+
+                if (isAndroid) {                 
+                    document.body.style.height = (window.outerHeight + 50) + 'px';
+                    setTimeout(function () {
+                        window.scrollTo(0, 1);
+                    }, 0);
+                }
+
+            }, false);
+
+        </script>
+
+    </body>
+</html>
